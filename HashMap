@@ -1,0 +1,62 @@
+import java.util.*;
+public class solution {
+	
+    public static int val(int n){
+        if(n==1){
+            return 1;
+        }
+        
+        return n+val(n-1);
+        
+    }
+    
+    public static void maxProduct(int [] arr,int n){
+        ArrayList<Integer> arrList=new ArrayList<>();
+        HashMap<Integer,Integer> map=new HashMap<>();
+        
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=i+1;j<arr.length;j++){
+                
+                if(map.containsKey(arr[i]*arr[j])){
+                    int val=map.get(arr[i]*arr[j]);
+                    map.put(arr[i]*arr[j],val+1);
+                }
+                else{
+                    arrList.add(arr[i]*arr[j]);
+                    map.put(arr[i]*arr[j],1);
+                }
+            }
+        }
+        
+        int max=Integer.MIN_VALUE;
+        int res=0;
+        for(int i=0;i<arrList.size();i++){
+            if(map.get(arrList.get(i))==max){
+            if(res<arrList.get(i)){
+                res=res;
+                max=map.get(arrList.get(i));
+            }
+            else{
+                res=arrList.get(i);
+                max=map.get(arrList.get(i));
+            }
+        }
+        
+        if(map.get(arrList.get(i))>max){
+            res=arrList.get(i);
+              //System.out.println(res +" "+(max));
+            max=map.get(arrList.get(i));
+        }
+            
+         
+           
+        }
+        max=val(max-1);
+         System.out.println(res +" "+(max));
+    }
+	public static void CountQuadruples(int[] arr, int n) {
+		
+        maxProduct(arr,n);
+	}
+	
+}
